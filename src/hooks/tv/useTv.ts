@@ -1,0 +1,109 @@
+import { useState } from "react";
+import { API_URL, TOKEN } from "../../config";
+import type { Tv, Cast, Crew } from "../../types/media";
+
+export function useTv() {
+  const [tv, setTv] = useState<Tv[]>([]);
+  const [tvDetalhes, setTvDetalhes] = useState<Tv | null>(null);
+  const [tvTop, setTvTop] = useState<Tv[]>([]);
+
+  const [airingToday, setAiringToday] = useState<Tv[]>([]);
+  const [onAir, setOnAir] = useState<Tv[]>([]);
+
+  const [cast, setCast] = useState<Cast[]>([]);
+  const [crew, setCrew] = useState<Crew[]>([]);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // 🔥 BASE FETCH
+  const fetchFromAPI = async (endpoint: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) throw new Error("API error");
+
+      return await response.json();
+    } catch (err) {
+      console.error(err);
+      setError("Erro ao carregar dados");
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 📺 TV LISTS
+  const getTv = async () => {
+    const data = await fetchFromAPI("/tv/popular");
+    if (data) setTv(data.results);
+  };
+
+  const getTvTopRated = async () => {
+    const data = await fetchFromAPI("/tv/top_rated");
+    if (data) setTvTop(data.results);
+  };
+
+  const getTvNowAiring = async () => {
+    const data = await fetchFromAPI("/tv/airing_today");
+    if (data) setAiringToday(data.results);
+  };
+
+  const getTvOnAir = async () => {
+    const data = await fetchFromAPI("/tv/on_the_air");
+    if (data) setOnAir(data.results);
+  };
+
+  // 📺 TV DETAILS (FIX: string ID)
+  const getTvDetalhes = async (id: string) => {
+    const data = await fetchFromAPI(`/tv/${id}`);
+    if (data) setTvDetalhes(data);
+  };
+
+  // 🎭 CREDITS
+  const getTvCredits = async (id: string) => {
+    const data = await fetchFromAPI(`/tv/${id}/credits`);
+    if (!data) return;
+
+    setCast(
+      data.cast.map((c: Cast) => ({
+        ...c,
+        profile_path: c.profile_path ?? null,
+      }))
+    );
+
+    setCrew(
+      data.crew.map((c: Crew) => ({
+        ...c,
+        profile_path: c.profile_path ?? null,
+      }))
+    );
+  };
+
+  return {
+    tv,
+    tvDetalhes,
+    tvTop,
+    airingToday,
+    onAir,
+    cast,
+    crew,
+    loading,
+    error,
+
+    getTv,
+    getTvDetalhes,
+    getTvTopRated,
+    getTvNowAiring,
+    getTvOnAir,
+    getTvCredits,
+  };
+}
