@@ -92,7 +92,7 @@ const TopRated = ({ tops, type, title }: TopRatedProps) => {
               width: activePage === i ? "20px" : "8px",
               height: "8px",
               borderRadius: "10px",
-              background: activePage === i ? "#3b36bd" : "#3c3c40",
+              background: activePage === i ? "#3b82f6" : "#3c3c40",
               cursor: "pointer",
               transition: "0.3s",
             }}

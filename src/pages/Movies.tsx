@@ -195,7 +195,7 @@ const Movies = () => {
       }}
     >
       {/* ⭐ TOP RATED */}
-      <TopRated tops={moviesTop} type="movie" title=" Top Rated" />
+      <TopRated tops={moviesTop} type="movie" title="" />
 
       {/* 🔥 NOW PLAYING *//*}
       <TopRated tops={playing} type="movie" title="🔥 Now Playing" />
@@ -205,10 +205,10 @@ const Movies = () => {
       {/* 🎬 POPULAR HEADER */}
       <div style={{ padding: "2rem" }}>
         <h1 style={{ fontSize: "2rem", marginBottom: "5px" }}>
-          🎬 Popular Movies
+          Popular Movies
         </h1>
         <p style={{ opacity: 0.7 }}>
-          Descobre os filmes mais populares do momento
+          Find the most popular movies at the moment
         </p>
       </div>
 

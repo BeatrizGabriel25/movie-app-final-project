@@ -41,4 +41,7 @@ const NowPlaying = ({ movies, title = "Now Playing" }: Props) => {
   );
 };
 
-export default NowPlaying;
+export default NowPlaying; 
+
+
+

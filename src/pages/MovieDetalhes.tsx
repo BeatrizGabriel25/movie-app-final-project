@@ -56,7 +56,7 @@ const MovieDetails = () => {
             position: "absolute",
             top: "20px",
             left: "20px",
-            background: "rgba(0,0,0,0.7)",
+            background: "#3c3c40",
             border: "none",
             color: "white",
             padding: "10px",
@@ -65,7 +65,7 @@ const MovieDetails = () => {
             zIndex: 2,
           }}
         >
-          ⬅ Voltar
+          ⬅
         </button>
 
         {/* 🎥 POSTER SOBREPOSTO */}
@@ -102,21 +102,26 @@ const MovieDetails = () => {
     gap: "15px",
     marginBottom: "1.5rem",
     flexWrap: "wrap",
+    /*justifyContent: "space-between",
+    alignItems: "center",*/
   }}
 >
   {/* RATING */}
   <div
-    style={{
-      background: "#3c3c40",
-      padding: "12px 16px",
-      borderRadius: "10px",
-     /* boxShadow: "0 8px 20px rgba(0,0,0,0.5)",*/
-      fontSize: "14px",
-      fontWeight: "500",
-    }}
-  >
-    ⭐ {moviesDetalhes.vote_average.toFixed(1)}
-  </div>
+  style={{
+    background: "#3c3c40",
+    padding: "12px 16px",
+    borderRadius: "10px",
+    fontSize: "16px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+  }}
+>
+  <span style={{ color: "gold", fontSize: "18px", lineHeight: 1, display: "flex", alignItems: "center"  }}>★</span>
+  {(moviesDetalhes.vote_average / 2).toFixed(1)}
+</div>
 
   {/* DATA */}
   <div
@@ -127,9 +132,12 @@ const MovieDetails = () => {
      /* boxShadow: "0 8px 20px rgba(0,0,0,0.5)",*/
       fontSize: "14px",
       fontWeight: "500",
+      display: "flex",
+    alignItems: "center",
+    gap: "6px",
     }}
   >
-    📅 {moviesDetalhes.release_date}
+    {moviesDetalhes.release_date}
   </div>
 
   {/* DURAÇÃO */}
@@ -141,10 +149,30 @@ const MovieDetails = () => {
       /*boxShadow: "0 8px 20px rgba(0,0,0,0.5)",*/
       fontSize: "14px",
       fontWeight: "500",
+       display: "flex",
+    alignItems: "center",
+    gap: "6px",
     }}
   >
-    ⏱ {moviesDetalhes.runtime} min
+    {moviesDetalhes.runtime} min
   </div>
+
+  {/* Favorito */}
+  <div
+  style={{
+    /*background: "#3c3c40",
+    padding: "12px 18px",
+    borderRadius: "10px",*/
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    transition: "0.2s",
+  }}
+>
+  <span style={{ fontSize: "28px", color: "red" }}>❤</span>
+</div>
+
 </div>
 
 {/* TÍTULO */}
@@ -203,7 +231,7 @@ const MovieDetails = () => {
               marginBottom: "2rem",
             }}
           >
-            🔗Site oficial
+            Open IMDb
           </a>
         )}
       </div>
