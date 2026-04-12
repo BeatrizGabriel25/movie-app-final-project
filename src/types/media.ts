@@ -67,5 +67,6 @@ export type Tv = {
   spoken_languages?: { english_name: string }[];
   production_companies?: { name: string }[];
   homepage?: string;
+  content_rating?: string; // New Idade
 };
 

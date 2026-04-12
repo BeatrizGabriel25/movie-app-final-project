@@ -37,7 +37,7 @@ const CreditsCard: React.FC<CreditsCardProps> = ({
               style={{
                 minWidth: isCast ? "150px" : "200px",
                 width: isCast ? "150px" : "200px",
-                height: isCast ? "280px" : "100px",
+                height: isCast ? "300px" : "100px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: isCast? "flex-start" : "center",

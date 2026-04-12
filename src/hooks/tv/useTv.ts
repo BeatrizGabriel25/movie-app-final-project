@@ -68,6 +68,29 @@ export function useTv() {
     if (data) setTvDetalhes(data);
   };
 
+
+   // TV Idade Novo
+const getTvRating = async (id: string) => {
+  const data = await fetchFromAPI(`/tv/${id}/content_ratings`);
+  if (!data) return;
+
+  // tenta Portugal → depois US → fallback null
+  const pt = data.results.find((r: any) => r.iso_3166_1 === "PT");
+  const us = data.results.find((r: any) => r.iso_3166_1 === "US");
+
+  const rating = pt?.rating || us?.rating || null;
+
+  setTvDetalhes((prev) => {
+    if (!prev) return prev;
+    return {
+      ...prev,
+      content_rating: rating,
+    };
+  });
+};
+
+
+
   // 🎭 CREDITS
   const getTvCredits = async (id: string) => {
     const data = await fetchFromAPI(`/tv/${id}/credits`);
@@ -105,5 +128,6 @@ export function useTv() {
     getTvNowAiring,
     getTvOnAir,
     getTvCredits,
+    getTvRating, // Novo Idade
   };
 }
