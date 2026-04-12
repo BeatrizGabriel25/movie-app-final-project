@@ -429,6 +429,23 @@ const MovieDetails = () => {
     fontSize: "12px",
   }}
 >
+
+      {/* 📺 SEASONS */}
+  <div
+    style={{
+      background: "rgba(60, 60, 64, 0.2)",
+      backdropFilter: "blur(6px)",
+      padding: "10px 12px",
+      borderRadius: "10px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "6px",
+      fontWeight: "bold",
+    }}
+  >
+    Min {moviesDetalhes.runtime}
+  </div>
   {/* 🎞 DATA DE LANÇAMENTO */}
   <div
     style={{

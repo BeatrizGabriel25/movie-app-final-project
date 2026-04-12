@@ -195,20 +195,6 @@ export function useTv() {
     if (data) setOnAir(data.results);
   };
 
-  // 🎯 NOVO: FILTRO POR GÉNERO
-  const getTvByGenre = async (genreId: number | "all") => {
-    const endpoint =
-      genreId === "all"
-        ? "/tv/popular"
-        : `/discover/tv?with_genres=${genreId}`;
-
-    const data = await fetchFromAPI(endpoint);
-
-    if (data) {
-      setTv(data.results);
-    }
-  };
-
   // 📺 TV DETAILS
   const getTvDetalhes = async (id: string) => {
     const data = await fetchFromAPI(`/tv/${id}`);
@@ -253,6 +239,16 @@ export function useTv() {
       }))
     );
   };
+
+  // Categorias
+  const getTvByGenre = async (genreId: number | null) => {
+  const endpoint = genreId
+    ? `/discover/tv?with_genres=${genreId}`
+    : `/tv/popular`;
+
+  const data = await fetchFromAPI(endpoint);
+  if (data) setTv(data.results);
+};
 
   return {
     tv,

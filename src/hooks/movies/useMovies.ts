@@ -107,6 +107,16 @@ const getGenres = async () => {
   if (data) setGenres(data.genres);
 };
 
+// Categorias
+const getMoviesByGenre = async (genreId: number | null) => {
+  const endpoint = genreId
+    ? `/discover/movie?with_genres=${genreId}`
+    : `/movie/popular`;
+
+  const data = await fetchFromAPI(endpoint);
+  if (data) setMovies(data.results);
+};
+
   return {
     movies,
     moviesDetalhes,
@@ -128,5 +138,6 @@ const getGenres = async () => {
     getMoviesCredits,
     getMoviesImages,
     getGenres, //New
+    getMoviesByGenre, // New
   };
 }  

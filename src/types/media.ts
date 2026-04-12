@@ -73,3 +73,19 @@ export type Tv = {
   content_rating?: string; // New Idade
 };
 
+export const movieCategories = [
+  { id: null, name: "All" },
+  { id: 28, name: "Action" },
+  { id: 18, name: "Drama" },
+  { id: 35, name: "Comedy" },
+  { id: 27, name: "Horror" },
+];
+
+export const tvCategories = [
+  { id: null, name: "All" },
+  { id: 10759, name: "Action" },
+  { id: 18, name: "Drama" },
+  { id: 35, name: "Comedy" },
+  { id: 9648, name: "Mystery" },
+];
+
