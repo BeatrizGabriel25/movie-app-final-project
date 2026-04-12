@@ -23,7 +23,6 @@ export function useMovies() {
 
   const [genres, setGenres] = useState<{ id: number; name: string }[]>([]); // NEW
 
-  // 🔥 helper base API
   const fetchFromAPI = async (endpoint: string) => {
     setLoading(true);
     setError(null);
@@ -48,7 +47,7 @@ export function useMovies() {
     }
   };
 
-  // 🎬 MOVIES LIST
+
   const getMovies = async () => {
     const data = await fetchFromAPI("/movie/popular");
     if (data) setMovies(data.results);
@@ -69,13 +68,13 @@ export function useMovies() {
     if (data) setUpcoming(data.results);
   };
 
-  // 🎬 MOVIE DETAILS (FIX: id STRING)
+ 
   const getMoviesDetalhes = async (id: string) => {
     const data = await fetchFromAPI(`/movie/${id}`);
     if (data) setMoviesDetalhes(data);
   };
 
-  // 🎭 CREDITS
+
   const getMoviesCredits = async (id: string) => {
     const data = await fetchFromAPI(`/movie/${id}/credits`);
     if (!data) return;
@@ -95,13 +94,13 @@ export function useMovies() {
     );
   };
 
-  // 🖼 IMAGES
+  // IMAGENS
   const getMoviesImages = async (id: string) => {
     const data = await fetchFromAPI(`/movie/${id}/images`);
     if (data) setImages(data);
   };
 
-  // 🎬 GENRES (NEW)
+  // GENRES 
 const getGenres = async () => {
   const data = await fetchFromAPI("/genre/movie/list");
   if (data) setGenres(data.genres);

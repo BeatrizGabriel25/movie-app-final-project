@@ -22,8 +22,8 @@ const NowPlaying = ({ movies, title = "Now Playing" }: Props) => {
           
 
     // esconder scrollbar
-    scrollbarWidth: "none", // Firefox
-    msOverflowStyle: "none", // IE/Edge antigo
+    scrollbarWidth: "none", 
+    msOverflowStyle: "none", 
   }}
   className="no-scrollbar"
 

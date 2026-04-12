@@ -66,7 +66,7 @@ const AiringTodayCard = ({ tv }: Props) => {
           {tv.name}
         </p>
 
-        {/* ⭐ STARS */}
+        {/*RATING*/}
         <div
           style={{
             marginTop: "-12px",

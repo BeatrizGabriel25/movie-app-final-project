@@ -31,7 +31,7 @@ const TopRated = ({ tops, type, title }: TopRatedProps) => {
     setActivePage(page);
   };
 
-  // 🔥 Atualiza dots quando o utilizador scrollar manualmente (mobile / mouse)
+ 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -65,7 +65,7 @@ const TopRated = ({ tops, type, title }: TopRatedProps) => {
           gap: "20px",
           paddingBottom: "10px",
 
-          // 🔥 esconder scrollbar (Firefox / Edge)
+        // SCROLL BAR ESCONDIDO
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}

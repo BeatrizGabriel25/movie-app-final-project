@@ -11,7 +11,7 @@ interface Person {
 
 interface CreditsCardProps {
   dados: Person[];
-  variant?: "cast" | "crew"; // 🔥 novo
+  variant?: "cast" | "crew"; 
 }
 
 const CreditsCard: React.FC<CreditsCardProps> = ({
@@ -50,7 +50,7 @@ const CreditsCard: React.FC<CreditsCardProps> = ({
                 textAlign: "center",
               }}
             >
-              {/* 🎭 CAST → COM IMAGEM */}
+              {/*CAST COM IMAGEM */}
               {isCast && (
                 <>
                   {person.profile_path ? (
@@ -77,7 +77,7 @@ const CreditsCard: React.FC<CreditsCardProps> = ({
                 </>
               )}
 
-              {/* 👤 NAME */}
+              {/*NAME */}
               
               <p
                 style={{
@@ -92,7 +92,7 @@ const CreditsCard: React.FC<CreditsCardProps> = ({
                 {person.name}
               </p>
 
-              {/* 🎬 ROLE */}
+              {/* ROLE */}
               <p
                 style={{
                   fontSize: "12px",

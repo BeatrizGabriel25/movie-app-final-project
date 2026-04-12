@@ -16,10 +16,8 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
 
   const year = date ? new Date(date).getFullYear() : "";
 
-  // ⭐ rating em formato 4.7
-  //const rating = item.vote_average.toFixed(1);
 
-  // 🎬 géneros (até 2 para não ficar gigante)
+  //géneros 
   const genres =
     item.genres?.slice(0, 2).map((g) => g.name).join(", ") || "";
 
@@ -29,7 +27,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
       style={{
         textDecoration: "none",
         color: "white",
-        flex: "0 0 100%", // 🔥 1 CARD = 1 PAGE FULL WIDTH
+        flex: "0 0 100%", 
         scrollSnapAlign: "center",
       }}
     >
@@ -66,7 +64,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
           }}
         />
 
-           {/* 🟥 TOP LEFT */}
+           {/* TOP RATED */}
         <span
           style={{
             position: "absolute",
@@ -82,7 +80,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
           Top Rated
         </span>
 
-        {/* ⭐ TOP RIGHT (SEM BACKGROUND) */}
+        {/* RATING */}
        <div
   style={{
     position: "absolute",
@@ -114,7 +112,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
   {((item.vote_average ?? 0) / 2).toFixed(1)}
 </div>
 
-        {/* 🎬 BOTTOM INFO */}
+        {/* INFO */}
         <div
           style={{
             position: "absolute",
@@ -143,7 +141,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
         
           </div>
 
-          {/* ▶️ PLAY BUTTON (BOTTOM RIGHT - OUTSIDE INFO) */}
+          {/* PLAY BUTTON */}
 <div
   style={{
     position: "absolute",
