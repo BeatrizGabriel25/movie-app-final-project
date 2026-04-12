@@ -1,68 +1,3 @@
-/*import { Link } from "react-router-dom";
-import type { Movie, Tv } from "../types/media";
-
-type TopRatedCardProps = {
-  item: Movie | Tv;
-  type: "movie" | "tv";
-};
-
-const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
-  const title = "title" in item ? item.title : item.name;
-
-  return (
-    <Link
-      to={`/${type}/${item.id}`}
-      style={{ textDecoration: "none", color: "white" }}
-    >
-      <div
-        style={{
-          minWidth: "150px",
-          width: "150px",
-          height: "260px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          cursor: "pointer",
-          transition: "transform 0.2s",
-        }}
-      >
-        {/* IMG *//*}
-        <img
-          src={
-            item.poster_path
-              ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
-              : "/no-image.png"
-          }
-          alt={title}
-          style={{
-            width: "100%",
-            height: "200px",
-            objectFit: "cover",
-            borderRadius: "8px",
-          }}
-        />
-
-        {/* TITLE *//*}
-        <p
-          style={{
-            fontSize: "12px",
-            marginTop: "5px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-          }}
-        >
-          {title}
-        </p>
-      </div>
-    </Link>
-  );
-};
-
-export default TopRatedCard;*/
-
 import { Link } from "react-router-dom";
 import type { Movie, Tv } from "../types/media";
 
@@ -82,7 +17,7 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
   const year = date ? new Date(date).getFullYear() : "";
 
   // ⭐ rating em formato 4.7
-  const rating = item.vote_average.toFixed(1);
+  //const rating = item.vote_average.toFixed(1);
 
   // 🎬 géneros (até 2 para não ficar gigante)
   const genres =
@@ -135,8 +70,8 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
         <span
           style={{
             position: "absolute",
-            top: "15px",
-            left: "15px",
+            bottom: "20px",
+            left: "20px",
             background: "#e50914",
             padding: "5px 10px",
             borderRadius: "6px",
@@ -148,23 +83,42 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
         </span>
 
         {/* ⭐ TOP RIGHT (SEM BACKGROUND) */}
-        <div
-          style={{
-            position: "absolute",
-            top: "15px",
-            right: "15px",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          ⭐ {rating}
-        </div>
+       <div
+  style={{
+    position: "absolute",
+    top: "15px",
+    right: "15px",
+    background: "rgba(60, 60, 64, 0.2)",
+    padding: "10px 12px",
+    borderRadius: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+    fontWeight: "bold",
+    fontSize: "12px",
+  }}
+>
+  <span
+    style={{
+      color: "gold",
+      fontSize: "18px",
+      lineHeight: 1,
+      display: "flex",
+      alignItems: "center",
+    }}
+  >
+    ★
+  </span>
+
+  {((item.vote_average ?? 0) / 2).toFixed(1)}
+</div>
 
         {/* 🎬 BOTTOM INFO */}
         <div
           style={{
             position: "absolute",
-            bottom: "20px",
+            top: "20px",
             left: "20px",
             color: "white",
             maxWidth: "60%",
@@ -183,9 +137,33 @@ const TopRatedCard = ({ item, type }: TopRatedCardProps) => {
           </h2>
 
           <p style={{ fontSize: "13px", opacity: 0.8 }}>
-            {year} {genres && `• ${genres}`}
-          </p>
-        </div>
+  {year}
+  {genres ? ` • ${genres}` : ""}
+</p>
+        
+          </div>
+
+          {/* ▶️ PLAY BUTTON (BOTTOM RIGHT - OUTSIDE INFO) */}
+<div
+  style={{
+    position: "absolute",
+    bottom: "20px",
+    right: "20px",
+    width: "42px",
+    height: "42px",
+    borderRadius: "50%",
+    background: "rgba(229, 9, 20, 0.9)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 8px 18px rgba(0,0,0,0.5)",
+    cursor: "default",
+  }}
+>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+</div>
       </div>
     </Link>
   );

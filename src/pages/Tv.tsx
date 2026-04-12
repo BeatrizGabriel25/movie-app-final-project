@@ -1,7 +1,8 @@
 /*import { useEffect } from "react";
 import { useTv } from "../hooks/tv/useTv";
-import Card from "../components/Card";
 import TopRated from "../components/TopRated";
+import AiringToday from "../components/AiringToday";
+import Card from "../components/Card";
 
 const Tv = () => {
   const {
@@ -27,28 +28,28 @@ const Tv = () => {
   return (
     <div
       style={{
-        background: "#0f0f0f",
+        background: "#1c1c25",
         minHeight: "100vh",
         color: "white",
       }}
     >
-      {/* ⭐ TOP RATED *//*}
-      <TopRated tops={tvTop} type="tv" title="⭐ Top Rated" />
+      {/* ⭐ TOP RATED (mantém TopRated) *//*}
+      <TopRated tops={tvTop} type="tv" title="" />
 
-      {/* 📺 AIRING TODAY *//*}
-      <TopRated tops={airingToday} type="tv" title="📺 Airing Today" />
+      {/* 📺 AIRING TODAY (NOVO LAYOUT) *//*}
+      <AiringToday tvs={airingToday} />
 
       {/* 🔥 HEADER *//*}
       <div style={{ padding: "2rem" }}>
         <h1 style={{ fontSize: "2rem", marginBottom: "5px" }}>
-          📺 Popular Series
+          Popular Series
         </h1>
         <p style={{ opacity: 0.7 }}>
-          Descobre as séries mais populares do momento
+          Find the moment most popular series 
         </p>
       </div>
 
-      {/* 🎥 GRID *//*}
+      {/* 🎥 GRID (mantém Card normal) *//*}
       <div
         style={{
           display: "grid",
@@ -83,8 +84,8 @@ const Tv = () => {
         <p style={{ textAlign: "center", color: "red" }}>{error}</p>
       )}
 
-      {/* 📡 ON THE AIR *//*}
-      <TopRated tops={onAir} type="tv" title="📡 On The Air" />
+      {/* 📡 ON THE AIR (NOVO LAYOUT TAMBÉM se quiseres depois) *//*}
+      <AiringToday tvs={onAir} title="On The Air" />
     </div>
   );
 };
@@ -111,12 +112,19 @@ const Tv = () => {
     error,
   } = useTv();
 
-  useEffect(() => {
-    getTv();
-    getTvTopRated();
-    getTvNowAiring();
-    getTvOnAir();
-  }, []);
+useEffect(() => {
+  const load = async () => {
+    await getTv();
+    await getTvTopRated();
+    await getTvNowAiring();
+    await getTvOnAir();
+
+    console.log("TV:", tv);
+    console.log("TOP:", tvTop);
+  };
+
+  load();
+}, []);
 
   return (
     <div
@@ -126,11 +134,29 @@ const Tv = () => {
         color: "white",
       }}
     >
-      {/* ⭐ TOP RATED (mantém TopRated) */}
-      <TopRated tops={tvTop} type="tv" title="" />
+      {/* ⏳ LOADING GLOBAL (não bloqueia UI inteira) */}
+      {loading && (
+        <p style={{ textAlign: "center", padding: "1rem", opacity: 0.6 }}>
+          Loading...
+        </p>
+      )}
 
-      {/* 📺 AIRING TODAY (NOVO LAYOUT) */}
-      <AiringToday tvs={airingToday} />
+      {/* ❌ ERROR */}
+      {error && (
+        <p style={{ textAlign: "center", color: "red", padding: "1rem" }}>
+          {error}
+        </p>
+      )}
+
+      {/* ⭐ TOP RATED */}
+      {tvTop?.length > 0 && (
+        <TopRated tops={tvTop} type="tv" title="" />
+      )}
+
+      {/* 📺 AIRING TODAY */}
+      {airingToday?.length > 0 && (
+        <AiringToday tvs={airingToday} />
+      )}
 
       {/* 🔥 HEADER */}
       <div style={{ padding: "2rem" }}>
@@ -138,11 +164,11 @@ const Tv = () => {
           Popular Series
         </h1>
         <p style={{ opacity: 0.7 }}>
-          Find the moment most popular series 
+          Find the most popular series
         </p>
       </div>
 
-      {/* 🎥 GRID (mantém Card normal) */}
+      {/* 🎥 GRID */}
       <div
         style={{
           display: "grid",
@@ -152,33 +178,29 @@ const Tv = () => {
           justifyItems: "center",
         }}
       >
-        {tv.map((serie) => (
-          <Card
-            key={serie.id}
-            id={serie.id}
-            name={serie.name}
-            rating={serie.vote_average}
-            poster={serie.poster_path}
-            date={serie.first_air_date}
-            type="tv"
-          />
-        ))}
+        {tv?.length > 0 ? (
+          tv.map((serie) => (
+            <Card
+              key={serie.id}
+              id={serie.id}
+              name={serie.name}
+              rating={serie.vote_average}
+              poster={serie.poster_path}
+              date={serie.first_air_date}
+              type="tv"
+            />
+          ))
+        ) : (
+          !loading && (
+            <p style={{ opacity: 0.6 }}>No series found</p>
+          )
+        )}
       </div>
 
-      {/* ⏳ LOADING */}
-      {loading && (
-        <p style={{ textAlign: "center", padding: "2rem", opacity: 0.6 }}>
-          Loading series...
-        </p>
+      {/* 📡 ON THE AIR */}
+      {onAir?.length > 0 && (
+        <AiringToday tvs={onAir} title="On The Air" />
       )}
-
-      {/* ❌ ERROR */}
-      {error && (
-        <p style={{ textAlign: "center", color: "red" }}>{error}</p>
-      )}
-
-      {/* 📡 ON THE AIR (NOVO LAYOUT TAMBÉM se quiseres depois) */}
-      <AiringToday tvs={onAir} title="On The Air" />
     </div>
   );
 };

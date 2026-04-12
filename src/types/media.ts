@@ -18,6 +18,9 @@ export type Movie = {
   number_of_seasons?: number;
   number_of_episodes?: number;
   genre_ids?: number[]; //New
+  adult?: boolean;
+  content_rating?: string; // New Idade
+ 
 
 };
 
